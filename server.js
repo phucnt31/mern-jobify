@@ -9,7 +9,6 @@ import jobRouter from "./routes/jobRouter.js";
 
 // middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
-import { validateTest } from "./middleware/validationMiddleware.js";
 
 dotenv.config();
 const app = express();
@@ -18,11 +17,6 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 app.use(express.json());
-
-app.post("/api/v1/test", validateTest, (req, res) => {
-  const { name } = req.body;
-  res.json({ msg: `hello ${name}` });
-});
 
 app.use("/api/v1/jobs", jobRouter);
 
