@@ -1,22 +1,24 @@
+import { NotFoundError } from "../errors/customErrors.js";
 import JobModel from "../models/JobModel.js";
+import { StatusCodes } from "http-status-codes";
 
 export const getAllJobs = async (req, res) => {
   const jobs = await JobModel.find({});
-  res.status(200).json({ jobs });
+  res.status(StatusCodes.OK).json({ jobs });
 };
 
 export const createJob = async (req, res) => {
   const job = await JobModel.create(req.body);
-  res.status(201).json({ job });
+  res.status(StatusCodes.CREATED).json({ job });
 };
 
 export const getJob = async (req, res) => {
   const { id } = req.params;
   const job = await JobModel.findById(id);
   if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
+    throw new NotFoundError(`no job with id ${id}`);
   }
-  res.status(200).json({ job });
+  res.status(StatusCodes.OK).json({ job });
 };
 
 export const updateJob = async (req, res) => {
@@ -25,16 +27,16 @@ export const updateJob = async (req, res) => {
     new: true,
   });
   if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
+    throw new NotFoundError(`no job with id ${id}`);
   }
-  res.status(200).json({ msg: "job modified", job });
+  res.status(StatusCodes.OK).json({ msg: "job modified", job });
 };
 
 export const deleteJob = async (req, res) => {
   const { id } = req.params;
   const job = await JobModel.findByIdAndDelete(id);
   if (!job) {
-    return res.status(404).json({ msg: `no job with id ${id}` });
+    throw new NotFoundError(`no job with id ${id}`);
   }
-  res.status(200).json({ msg: "job deleted" });
+  res.status(StatusCodes.OK).json({ msg: "job deleted" });
 };
