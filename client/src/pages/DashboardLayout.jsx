@@ -1,11 +1,19 @@
 import React, { createContext, useContext, useState } from "react";
-import { Outlet } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Dashboard";
 import { Navbar, BigSidebar, SmallSidebar } from "../components";
+import { Outlet, redirect, useLoaderData } from "react-router-dom";
+import customFetch from "../utils/customFetch";
+
+export const loader = () => {
+  return "first";
+};
 
 const DashboardContext = createContext();
 
 const DashboardLayout = ({ isDarkThemeEnabled }) => {
+  const data = useLoaderData();
+  console.log(data);
+
   // temp
   const user = { name: "john" };
   const [showSidebar, setShowSidebar] = useState(false);
