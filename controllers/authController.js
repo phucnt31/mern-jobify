@@ -8,7 +8,7 @@ export const register = async (req, res) => {
   const isFirstAccount = (await User.countDocuments()) === 0;
   req.body.role = isFirstAccount ? "admin" : "user";
 
-  req.body.password = await hashPasswordPassword(req.body.password);
+  req.body.password = await hashPassword(req.body.password);
 
   const user = await User.create(req.body);
   res.status(StatusCodes.CREATED).json({ msg: "user created" });
