@@ -5,6 +5,11 @@ import * as dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
+// public
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
+
 // routers
 import jobRouter from "./routes/jobRouter.js";
 import authRouter from "./routes/authRouter.js";
@@ -22,6 +27,9 @@ if (process.env.NODE_ENV === "development") {
 }
 app.use(express.json());
 app.use(cookieParser());
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.resolve(__dirname, "./public")));
 
 app.use("/api/v1/jobs", authenticateUser, jobRouter);
 app.use("/api/v1/users", authenticateUser, userRouter);
