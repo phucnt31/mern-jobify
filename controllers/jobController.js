@@ -4,7 +4,7 @@ import JobModel from "../models/JobModel.js";
 import { StatusCodes } from "http-status-codes";
 
 export const getAllJobs = async (req, res) => {
-  const { search, jobStatus, jobType } = req.query;
+  const { search, jobStatus, jobType, sort } = req.query;
 
   const queryObject = {
     createdBy: req.user.userId,
@@ -22,7 +22,15 @@ export const getAllJobs = async (req, res) => {
     queryObject.jobType = jobType;
   }
 
-  const jobs = await JobModel.find(queryObject);
+  const sortOptions = {
+    newest: "-createdAt",
+    oldest: "createdAt",
+    "a-z": "position",
+    "z-a": "-position",
+  };
+  const sortKey = sortOptions[sort] || sortOptions.newest;
+
+  const jobs = await JobModel.find(queryObject).sort(sortKey);
   res.status(StatusCodes.OK).json({ jobs });
 };
 
