@@ -14,6 +14,7 @@ import {
   Admin,
   EditJob,
 } from "./pages";
+import { ErrorElement } from "./components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -82,6 +83,7 @@ const router = createBrowserRouter([
             path: "stats",
             element: <Stats />,
             loader: statsLoader,
+            errorElement: <ErrorElement />,
           },
           {
             path: "all-jobs",
