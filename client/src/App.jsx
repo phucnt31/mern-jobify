@@ -33,13 +33,13 @@ import { loader as editJobLoader } from "./pages/EditJob";
 import { loader as adminLoader } from "./pages/Admin";
 import { loader as statsLoader } from "./pages/Stats";
 
-const checkDefaultTheme = () => {
+export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
   document.body.classList.toggle("dark-theme", isDarkTheme);
   return isDarkTheme;
 };
 
-const isDarkThemeEnabled = checkDefaultTheme();
+checkDefaultTheme();
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -71,12 +71,7 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: (
-          <DashboardLayout
-            isDarkThemeEnabled={isDarkThemeEnabled}
-            queryClient={queryClient}
-          />
-        ),
+        element: <DashboardLayout queryClient={queryClient} />,
         loader: dashboardLoader(queryClient),
         children: [
           {
