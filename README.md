@@ -1,6 +1,6 @@
 ## Introduction
 
-- Welcome to Jobify application. This application provides users with a platform to track and manage their applied jobs. Users can perform CRUD (Create, Read, Update, Delete) operations on their applied jobs, utilize search and sort functionality, and gain insights into their job application statistics through visual charts. Additionally, users can update their profile information and toggle the application's theme.
+- Welcome to Jobify application. This application provides users with a platform to track and manage their applied jobs. To access the full functionality of the application, users are required to register and log in. However, if users prefer not to register, they can still explore the application to some extent using the "Explore The App" option, although certain functions will be limited. Once logged in or exploring as a guest, users can perform CRUD (Create, Read, Update, Delete) operations on their applied jobs, utilize search and sort functionality, and gain insights into their job application statistics through visual charts. Additionally, users can update their profile information and customize the application's theme.
 
 #### Complete App
 
